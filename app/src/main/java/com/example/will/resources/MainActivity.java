@@ -10,12 +10,17 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
     }
+
+//    public List<Building> buildingList = new ArrayList<Building>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

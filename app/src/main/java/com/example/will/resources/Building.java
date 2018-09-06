@@ -12,6 +12,7 @@ public class Building {
     public int maxWorkers;
     public int currentWorkers;
     public List<Citizen> workers = new ArrayList<>();
+    public int level;
 
     public boolean Build(Map<Resource, Integer> requirements, Map<Resource,Integer> output){
 //        Set<Resource> resUsed = requirements.keySet();
@@ -33,5 +34,5 @@ public class Building {
 
 class Woodcutter extends Building{
 
-    
+
 }
