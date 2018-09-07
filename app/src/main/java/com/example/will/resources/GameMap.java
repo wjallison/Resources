@@ -9,6 +9,7 @@ public class GameMap {
     public int availHousing;
     public int population;
     public List<Building> buildingList = new ArrayList<Building>();
+//    public List<List<Building>> buildingCategoryList = new ArrayList<List<Building>>();
 
     public List<Citizen> census = new ArrayList<Citizen>();
 
@@ -17,6 +18,10 @@ public class GameMap {
 
     public int funds;
 
+    public GameMap(){
 
+        //Initialize buildingCategoryList
+//        buildingCategoryList.add(new ArrayList<Building>());
+    }
 
 }

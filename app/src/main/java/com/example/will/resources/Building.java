@@ -14,6 +14,38 @@ public class Building {
     public List<Citizen> workers = new ArrayList<>();
     public int level;
 
+    public double workProgress;
+    public int workNeeded;
+    public String relevantSkill;
+    public String relevantBaseSkill;
+    public double expPer;
+    public Map<Resource,Integer> recipe = new HashMap<Resource,Integer>();
+    public Map<Resource,Integer> output = new HashMap<Resource,Integer>();
+
+    public void Tick(){
+        double work = 0;
+        if(currentWorkers > 0){
+            for(int i = 0; i < currentWorkers; i++){
+                work += workers.get(i).skills.get(relevantSkill) * .01;
+            }
+        }
+        workProgress += work;
+        if(workProgress > workNeeded){
+            if(Build(recipe,output)){
+                for(Resource r : output.keySet()){
+                    storage.put(r,storage.get(r)+output.get(r));
+                }
+                workProgress -= workNeeded;
+                for(Citizen c : workers){
+                    c.Learn(relevantSkill,relevantBaseSkill,expPer);
+                }
+            }
+        }
+        else {
+            workProgress -= work;
+        }
+    }
+
     public boolean Build(Map<Resource, Integer> requirements, Map<Resource,Integer> output){
 //        Set<Resource> resUsed = requirements.keySet();
 //        for(int i = 0; i < requirements.size();i++){
@@ -30,9 +62,4 @@ public class Building {
         }
         return true;
     }
-}
-
-class Woodcutter extends Building{
-
-
 }
