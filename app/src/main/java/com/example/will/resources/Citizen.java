@@ -8,6 +8,7 @@ import java.util.Random;
 public class Citizen {
     public String name;
     public int idNo;
+    public boolean hasJob;
     public Map<String, Double> skills = new HashMap<String, Double>();
 
     public double skillsToBaseSkillsRate = 0.1;

@@ -14,6 +14,9 @@ public class Building {
     public List<Citizen> workers = new ArrayList<>();
     public int level;
 
+    //Only relevant for houses:
+    public int livingSpace;
+
     public double workProgress;
     public int workNeeded;
     public String relevantSkill;
@@ -40,9 +43,9 @@ public class Building {
                     c.Learn(relevantSkill,relevantBaseSkill,expPer);
                 }
             }
-        }
-        else {
-            workProgress -= work;
+            else {
+                workProgress -= work;
+            }
         }
     }
 
