@@ -8,6 +8,13 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <GridView
+        android:id="@+id/mainGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </GridView>
+
     <TextView
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"

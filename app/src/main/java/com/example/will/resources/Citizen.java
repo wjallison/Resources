@@ -26,6 +26,7 @@ public class Citizen {
         skills.put("Smithing",WeightedRandom(skills.get("Basic Strength")));
         skills.put("Mechanisms",WeightedRandom(skills.get("Basic Intelligence")));
         skills.put("Trading",WeightedRandom(skills.get("Basic Intelligence")));
+        skills.put("Management",WeightedRandom(skills.get("Basic Intelligence")));
     }
 
     public double WeightedRandom(){

@@ -1,6 +1,8 @@
 package com.example.will.resources;
 
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,10 +40,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        GridView gv = (GridView)findViewById(R.id.mainGridView);
+        gv.setAdapter(new ImageAdapter(this));
+
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+//        gv.getOnItemClickListener() = AdapterView.OnItemClickListener{
+//        }
+
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
     }
+
+//    @Override
+//    public void onItemClick
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
