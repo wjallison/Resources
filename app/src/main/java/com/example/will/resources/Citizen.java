@@ -13,7 +13,9 @@ public class Citizen {
 
     public double skillsToBaseSkillsRate = 0.1;
 
-    public Citizen(){
+    public Citizen(String nameIn){
+        name = nameIn;
+
         skills.put("Basic Intelligence",WeightedRandom());
         skills.put("Basic Strength",WeightedRandom());
         skills.put("Basic Dexterity",WeightedRandom());
@@ -27,6 +29,8 @@ public class Citizen {
         skills.put("Mechanisms",WeightedRandom(skills.get("Basic Intelligence")));
         skills.put("Trading",WeightedRandom(skills.get("Basic Intelligence")));
         skills.put("Management",WeightedRandom(skills.get("Basic Intelligence")));
+
+
     }
 
     public double WeightedRandom(){

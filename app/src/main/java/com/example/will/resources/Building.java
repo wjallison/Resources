@@ -9,6 +9,7 @@ import java.util.Set;
 public class Building {
     public String displayName;
     public Map<Resource, Integer> storage = new HashMap<Resource, Integer>();
+    public Map<Resource, Integer> maxStorage = new HashMap<Resource, Integer>();
     public int maxWorkers;
     public int currentWorkers;
     public List<Citizen> workers = new ArrayList<>();
@@ -47,6 +48,19 @@ public class Building {
                 workProgress -= work;
             }
         }
+    }
+
+    public int Receive(Resource r,Integer amnt){
+        int open = maxStorage.get(r) - storage.get(r);
+        if(open >= amnt){
+            storage.put(r,storage.get(r) + amnt);
+            return 0;
+        }
+        else{
+            storage.put(r,storage.get(r) + open);
+            return amnt - open;
+        }
+
     }
 
     public boolean Build(Map<Resource, Integer> requirements, Map<Resource,Integer> output){

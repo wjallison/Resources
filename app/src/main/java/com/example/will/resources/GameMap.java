@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class GameMap {
     public int availHousing;
@@ -16,12 +17,13 @@ public class GameMap {
     public Map<Resource, Integer> totalAvailStorage = new HashMap<Resource, Integer>();
     public Map<Resource, Integer> totalUsedStorage = new HashMap<Resource, Integer>();
 
+    public Map<Resource, Integer> spareResources = new HashMap<>();
+
     public int funds;
 
     public GameMap(){
 
-        //Initialize buildingCategoryList
-//        buildingCategoryList.add(new ArrayList<Building>());
+
     }
 
     public void CheckForJobs(){
@@ -73,6 +75,75 @@ public class GameMap {
         }
     }
 
+    public void MoveResources(){
+/*
+        First, if a building has some of a resource but doesn't need it, remove that resource from its inventory
+        and place it in the spare inventory.
+*/
+//        Map<Resource, Integer> tempResources = new HashMap<>();
+        for(int i = 0; i < buildingList.size();i++){
+            Set<Resource> neededRes = buildingList.get(i).recipe.keySet();
+            Set<Resource> containedRes = buildingList.get(i).storage.keySet();
+
+            for(Resource r : containedRes){
+                if(neededRes.contains(r)){
+                    continue;
+                }
+                else {
+                    if(spareResources.containsKey(r)){
+                        spareResources.put(r,spareResources.get(r) + buildingList.get(i).storage.get(r));
+                        buildingList.get(i).storage.remove(r);
+                    }
+                    else {
+                        spareResources.put(r,buildingList.get(i).storage.get(r));
+                        buildingList.get(i).storage.remove(r);
+                    }
+                }
+            }
+        }
+
+        //For each resoruce, build two lists: a list of the demand for each resource for each building, and a list of how full that building's inventory
+        //is of that resource.  Then, assign the resource to buildings.
+        List<Integer> demandList = new ArrayList<>();
+        List<Double> filledList = new ArrayList<>();
+        List<Integer> openSpace = new ArrayList<>();
+        Integer totalOpenSpace = 0;
+        for(Resource r : totalUsedStorage.keySet()) {
+            demandList.clear();
+            filledList.clear();
+            openSpace.clear();
+            totalOpenSpace = 0;
+            for (int j = 0; j < buildingList.size(); j++) {
+                if (buildingList.get(j).recipe.containsKey(r)) {
+                    demandList.add(buildingList.get(j).recipe.get(r));
+                    filledList.add(1 - (double) buildingList.get(j).storage.get(r) / (double) buildingList.get(j).maxStorage.get(r));
+                    openSpace.add(buildingList.get(j).maxStorage.get(r) - buildingList.get(j).storage.get(r));
+                    totalOpenSpace += openSpace.get(j);
+                }
+            }
+            /*Two cases: there are more resources than buildings that require them
+            * OR
+            * there is more space in buildings than resources available.
+            * */
+            //More open space than resources available
+            if(totalOpenSpace > spareResources.get(r)){
+
+            }
+
+            //open space exactly equals the number of resources available
+            else if(totalOpenSpace == spareResources.get(r)){
+
+            }
+
+            //Less open space than available resources
+            else{
+
+            }
+
+        }
+//        }
+    }
+
     public void Tick(){
         //Things to accomplish in a tick:
         //Buildings produce
@@ -89,6 +160,7 @@ public class GameMap {
         CheckForJobs();
 
         //Resources move
+
 
         //Move-ins
 
